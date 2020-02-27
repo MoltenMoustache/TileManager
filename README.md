@@ -46,11 +46,11 @@ This will return a reference to a random Tile object on the grid.
 This will return 'count' amount of random Tile objects, it will also ensure no tile is randomly selected more than once.
 
 ##### GetRow(y)
-This function will return the entire row at coordinate 'y' as an array of Tile objects.
-[][][][] y1
-[][][][] **y2** <- Returns this row
-[][][][] y3
-[][][][] y4
+This function will return the entire row at coordinate 'y' as an array of Tile objects.  
+[][][][] y1  
+[][][][] **y2** <- Returns this row  
+[][][][] y3  
+[][][][] y4  
 
 ##### GetColumm(x)
 This function will return the entire column at coordinate 'x' as an array of Tile objects.
