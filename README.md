@@ -59,7 +59,7 @@ This function will return the entire column at coordinate 'x' as an array of Til
 [] [] [] []  
 [] [] [] []  
 x1 x2 **x3** x4  
-       **^ Returns this entire column**
+|	  **^ Returns this entire column**
 	  
 ##### GetLineFromPoint(point, direction, length)
 This function will return an array of Tile objects in the form of a line from the point coordinates provided.  
@@ -85,11 +85,11 @@ The returned line DOES include the originating tile.
 This function returns an array of Tile objects in the form of a cross (+) formation, originating from the point coordinates provided.  
 The 'length' argument determines how long each line of the cross is.  
 _GetCrossFromPoint(*, 2)_  
-[ ] [ ] [.] [ ] [ ]  
-[ ] [ ] [.] [ ] [ ]		* = point  
-[.] [.] [*] [.] [.]		. = returned tile  
-[ ] [ ] [.] [ ] [ ]  
-[ ] [ ] [.] [ ] [ ]  
+[ ] [ ] **[.]** [ ] [ ]  
+[ ] [ ] **[.]** [ ] [ ]		# = point  
+**[.] [.]** [#] **[.] [.]**		**[]** = returned tile  
+[ ] [ ] **[.]** [ ] [ ]  
+[ ] [ ] **[.]** [ ] [ ]  
 The array returned does NOT include the originating tile.
 
 ##### GetCrossWithPoint(point, length)
@@ -97,9 +97,9 @@ This function returns an array of Tile objects in the form of a cross (+) format
 The 'length' argument determines how long each line of the cross is.  
 
 _GetCrossWithPoint(*, 2)_  
-[ ] [ ] [.] [ ] [ ]  
-[ ] [ ] [.] [ ] [ ]		* = point  
-[.] [.] [*] [.] [.]		. = returned tile  
-[ ] [ ] [.] [ ] [ ]  
-[ ] [ ] [.] [ ] [ ]  
+[ ] [ ] **[.]** [ ] [ ]  
+[ ] [ ] **[.]** [ ] [ ]		# = point  
+**[.] [.] [#] [.] [.]**		**[]** = returned tile  
+[ ] [ ] **[.]** [ ] [ ]  
+[ ] [ ] **[.]** [ ] [ ]  
 The array returned DOES include the originating tile.

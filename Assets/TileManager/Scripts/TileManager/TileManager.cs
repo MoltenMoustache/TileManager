@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class TileManager : MonoBehaviour
 {
+    #region Singleton
+    public static TileManager instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+    #endregion
+
+
     GameObject[,] tiles;
+    Djikstras.Node[,] nodes;
     [SerializeField] IntVector2 gridDimensions;
     [SerializeField] GameObject tilePrefab;
     [SerializeField] Transform tileParent;
     [SerializeField] float spawnOffset;
 
-    private void Start()
-    {
-        SpawnGrid();
-    }
 
     GameObject[] TwoDimensionToOneDimensionArray(GameObject[,] a_2dArray)
     {
@@ -37,6 +43,28 @@ public class TileManager : MonoBehaviour
     {
         Vector3 spawnPosition = new Vector3(0, 0, 0);
         tiles = new GameObject[gridDimensions.x, gridDimensions.y];
+        nodes = new Djikstras.Node[gridDimensions.x, gridDimensions.y];
+
+        for (int x = 0; x < gridDimensions.x; x++)
+        {
+            spawnPosition.x += spawnOffset;
+            spawnPosition.z = 0;
+            for (int y = 0; y < gridDimensions.y; y++)
+            {
+                spawnPosition.z += spawnOffset;
+                GameObject newTile = Instantiate(tilePrefab, spawnPosition, Quaternion.identity, tileParent);
+                newTile.name = "Tile [" + x + "," + y + "]";
+                newTile.tag = "Tile";
+                tiles[x, y] = newTile;
+            }
+        }
+    }
+
+    public void SpawnGrid(float a_yPos)
+    {
+        Vector3 spawnPosition = new Vector3(0, a_yPos, 0);
+        tiles = new GameObject[gridDimensions.x, gridDimensions.y];
+        nodes = new Djikstras.Node[gridDimensions.x, gridDimensions.y];
 
         for (int x = 0; x < gridDimensions.x; x++)
         {
@@ -70,10 +98,40 @@ public class TileManager : MonoBehaviour
         }
     }
 
+    #region Djikstra's Shortest Path
     public void AllocateNeighbourTiles()
     {
+        for (int x = 0; x < gridDimensions.x; x++)
+        {
+            for (int y = 0; y < gridDimensions.y; y++)
+            {
 
+                // Connects Nodes horziontally
+                if (x < gridDimensions.x - 1)
+                    CreateEdge(nodes[x, y], nodes[x + 1, y], spawnOffset);
+                // Connects Nodes vertically
+                if (y < gridDimensions.y - 1)
+                    CreateEdge(nodes[x, y], nodes[x, y + 1], spawnOffset);
+
+                // Connects Nodes diagonally
+                float diagonalOffset = 1.414213562f;
+                // Down to the right '/'
+                if (x > 0 && y < gridDimensions.y - 1)
+                    CreateEdge(nodes[x, y], nodes[x + 1, y - 1], spawnOffset * diagonalOffset);
+                // Up to the right '/'
+                if (x < gridDimensions.x - 1 && y < gridDimensions.y - 1)
+                    CreateEdge(nodes[x, y], nodes[x + 1, y + 1], spawnOffset * diagonalOffset);
+
+                nodes[x, y].SetGridCoordinates(new IntVector2(x, y));
+            }
+        }
     }
+
+    void CreateEdge(Djikstras.Node a_nodeA, Djikstras.Node a_nodeB, float a_cost = 1.0f)
+    {
+        Djikstras.Edge newEdge = new Djikstras.Edge(a_nodeA, a_nodeB, a_cost);
+    }
+    #endregion
 
     #region Getters
     // @brief Returns the tile at a_tileCoordinates in the grid
@@ -278,6 +336,16 @@ public class TileManager : MonoBehaviour
         }
 
         return cross;
+    }
+
+    public int GetWidth()
+    {
+        return gridDimensions.x;
+    }
+
+    public int GetHeight()
+    {
+        return gridDimensions.y;
     }
     #endregion
 
