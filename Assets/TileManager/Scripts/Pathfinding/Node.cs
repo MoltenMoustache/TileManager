@@ -6,10 +6,10 @@ namespace Djikstras
 {
     public class Node : MonoBehaviour
     {
-        [SerializeField] float gScore = 0.0f;
+        float gScore = 0.0f;
         Node previousNode = null;
-        [SerializeField] List<Edge> edges = new List<Edge>();
-        [SerializeField] IntVector2 gridCoordinates;
+        List<Edge> edges = new List<Edge>();
+        IntVector2 gridCoordinates;
 
         public void AddEdge(Edge a_edge)
         {
@@ -22,7 +22,7 @@ namespace Djikstras
                 edges.Remove(a_edge);
         }
 
-        void ResetNode()
+        public void ResetNode()
         {
             gScore = 0.0f;
             previousNode = null;
@@ -54,6 +54,11 @@ namespace Djikstras
             return false;
         }
 
+        public void SetMaterial(Material a_material)
+        {
+            GetComponent<Renderer>().material = a_material;
+        }
+
         #region Getters
         public float GetGScore()
         {
@@ -78,7 +83,7 @@ namespace Djikstras
         #endregion
 
         #region Setters
-        void SetGScore(float a_gScore)
+        public void SetGScore(float a_gScore)
         {
             gScore = a_gScore;
         }
@@ -88,7 +93,7 @@ namespace Djikstras
             edges = a_edges;
         }
 
-        void SetPreviousNode(Node a_node)
+        public void SetPreviousNode(Node a_node)
         {
             previousNode = a_node;
         }

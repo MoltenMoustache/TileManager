@@ -22,7 +22,7 @@ namespace Djikstras
                 nodes[i].AddEdge(this);
             }
 
-            
+
             cost = a_cost;
             SetValid(true);
 

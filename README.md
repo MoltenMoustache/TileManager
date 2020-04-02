@@ -14,11 +14,16 @@ This project was created because I'm a big fan of tile-based games such as Turn-
 * Get Line With Point (point, direction, length)
 * Get Cross From Point (point, length)
 * Get Cross With Point (point, length)
-
-## Future Features:
+* Djikstra's Shortest Path
 * Get Circle From Point(point, radius)
 * Get Circle With Point(point, radius)
-* Djikstra's Shortest Path
+* Get Width()
+* Get Height()
+* Get Neighbour Tiles()
+* Get Diagonal Cross From Point(point, length)
+* Get Diagonal Cross With Point(point, length)
+
+## Future Features:
 
 ## Feature Documentation
 
@@ -31,7 +36,7 @@ Then add the x,y size of the grid in the Grid Dimensions variable.
 Finally specify how far apart you want each tile to be and then call the 'SpawnGrid()' function.
 
 ### Getting Tiles
-The TileManager script includes 12 'Getter' functions for acquiring certain tiles, which you can then mess around with as you wish. Each Getter function returns either a reference to a Tile object or an array of Tile objects.
+The TileManager script includes 17 'Getter' functions for acquiring certain tiles, which you can then mess around with as you wish. Each Getter function returns either a reference to a Tile object or an array of Tile objects.
 
 ##### GetTile(x,y)
 This function will simply return a reference to the Tile object at grid coordinates x,y.
@@ -103,3 +108,39 @@ _GetCrossWithPoint(*, 2)_
 [ ] [ ] **[.]** [ ] [ ]  
 [ ] [ ] **[.]** [ ] [ ]  
 The array returned DOES include the originating tile.
+
+##### GetDiagonalCrossFromPoint(point, length)
+This function returns an array of Tile objects in the form of an X formation, originating from the point coordinates provided.  
+The 'length' argument determines how long each line of the cross is.  
+
+The array returned does NOT include the originating tile.
+
+##### GetDiagonalCrossWithPoint(point, length)
+This function returns an array of Tile objects in the form of an X formation, originating from the point coordinates provided.  
+The 'length' argument determines how long each line of the cross is.  
+
+The array returned DOES include the originating tile.
+
+##### GetCircleFromPoint(point, radius)
+This function returns an array of Tile objects in the form of an O formation, originating from the point coordinates provided.  
+The 'radius' argument determines the radius of the returned circle.
+
+The array returned does NOT include the originating tile.
+
+##### GetCircleWithPoint(point, radius)
+This function returns an array of Tile objects in the form of an O formation, originating from the point coordinates provided.  
+The 'radius' argument determines the radius of the returned circle.
+
+The array returned DOES include the originating tile.
+
+##### GetNeighbours(point)
+This function returns the tiles directly above, below, to the left and to the right of the 'point' in the form of an array of Tile objects.
+
+The array returned does NOT include the originating tile.
+
+##### GetWidth()
+This function returns the length of the X axis (width) of the grid as an integer.
+
+##### GetHeight()
+This function returns the length of the Y axis (height) of the grid as an integer.
+
